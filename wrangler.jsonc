@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dayan",
+  "compatibility_date": "2026-10-14",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "none"
+  }
+}
