@@ -1,4 +1,4 @@
-import { readFile, mkdir, rm, writeFile, stat } from 'node:fs/promises';
+import { readFile, mkdir, rm, writeFile, stat, copyFile } from 'node:fs/promises';
 
 const source = new URL('../dayan.html', import.meta.url);
 const output = new URL('../dist/', import.meta.url);
@@ -11,6 +11,7 @@ if (before.size !== after.size || before.mtimeMs !== after.mtimeMs) {
 if (!/<\/html\s*>\s*$/i.test(html)) {
   throw new Error('dayan.html está incompleto: falta el cierre </html>. Termina de guardar el archivo antes de compilar.');
 }
+await stat(new URL('../img1.png', import.meta.url));
 await rm(output, { recursive: true, force: true });
 await mkdir(new URL('assets/', output), { recursive: true });
 const types = { 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp', 'audio/mpeg': 'mp3', 'audio/mp4': 'm4a', 'audio/ogg': 'ogg' };
@@ -25,6 +26,7 @@ const page = html.replace(/data:([\w.+-]+\/[\w.+-]+);base64,([A-Za-z0-9+/=\r\n]+
   return `/${name}`;
 });
 for (const { name, data } of assets) await writeFile(new URL(name, output), data);
+await copyFile(new URL('../img1.png', import.meta.url), new URL('img1.png', output));
 await writeFile(new URL('index.html', output), page);
 await writeFile(new URL('dayan.html', output), page);
 console.log(`Sitio preparado en dist/: HTML y ${count} archivos multimedia. Fuente original conservada.`);

@@ -1,6 +1,6 @@
 # Dayan en Cloudflare Workers
 
-`dayan.html` es el archivo fuente. El proceso de compilación conserva su diseño y contenido, extrae las imágenes y canciones base64 a archivos independientes y genera `dist/index.html` y `dist/dayan.html`.
+`dayan.html` es el archivo fuente y utiliza `img1.png` del proyecto como retrato. La compilación también copia esta imagen a `dist/`. El proceso de compilación conserva su diseño y contenido, extrae las imágenes y canciones base64 a archivos independientes y genera `dist/index.html` y `dist/dayan.html`.
 
 ## Ejecutar localmente
 
